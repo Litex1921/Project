@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Motormodels;
 
 class ModelsController extends Controller
 {
@@ -13,7 +14,8 @@ class ModelsController extends Controller
      */
     public function index()
     {
-        return view('Models.index');
+         $models=Motormodels::all();
+        return view('Models.index')->with('models', $models);
     }
 
     /**
@@ -23,7 +25,7 @@ class ModelsController extends Controller
      */
     public function create()
     {
-        //
+         return view('Models.create')->with('models', new Motormodels());
     }
 
     /**
@@ -34,7 +36,15 @@ class ModelsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $valid = $request->validate([
+            'name' => 'required'
+        ]);
+            $models = new Motormodels;
+        $models->name = $valid['name'];
+        $models->save();
+        return redirect('/model');
+    
+
     }
 
     /**
@@ -45,7 +55,8 @@ class ModelsController extends Controller
      */
     public function show($id)
     {
-        //
+         $model = Motormodels::find($id);
+        return view('Models.show')->with('model', $model);
     }
 
     /**
@@ -56,7 +67,8 @@ class ModelsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Motormodels::find($id);
+        return view('Models.edit')->with('model', $model);
     }
 
     /**
@@ -68,7 +80,15 @@ class ModelsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $valid = $request->validate([
+            'name' => 'required',   
+             ]);
+
+        $model = Motormodels::find($id);
+        $model->name = $valid['name'];
+        $model->save();
+
+        return redirect('/model');
     }
 
     /**
@@ -79,6 +99,8 @@ class ModelsController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $model = Motormodels::find($id)->delete();
+
+        return redirect('/model');   
     }
 }

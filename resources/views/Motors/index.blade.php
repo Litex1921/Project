@@ -6,6 +6,8 @@
     <th>Year of Production</th>   
 
     <th>Km</th>
+    <th>Price for day</th>
+    <th>Rent</th>
     <th>Actions</th>   
   </tr>
   @foreach($motors as $motor) 
@@ -14,6 +16,8 @@
   	</td>
   	<td>{{$motor->year_of_production}}</td>
   	<td>{{$motor->km}}</td>
+  	<td>{{$motor->price_for_day}}</td>
+  	<td>{{$motor->rent}}</td>
   	<td>
   		<a href="/motor/{{$motor->id}}/">View</a>
   		<a href="/motor/{{$motor->id}}/edit">Edit</a>

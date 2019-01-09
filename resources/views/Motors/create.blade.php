@@ -19,5 +19,12 @@ Create view
 	{!!Form::label('km', 'Km')!!}
 	{!!Form::text('km')!!} <br>
 
+ {!!Form::label('price_for_day', 'Price for day')!!}
+  {!!Form::text('price_for_day')!!} <br>
+
+    {!!Form::label('rent', 'Rent')!!}
+  {!!Form::text('rent')!!} <br>
+
+
 	{!!Form::submit()!!}
 {!!Form::close()!!}

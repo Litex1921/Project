@@ -18,5 +18,11 @@
   {!!Form::label('km', 'Km')!!}
   {!!Form::text('km', $motor->km)!!} <br>
 
+    {!!Form::label('price_for_day', 'Price for day')!!}
+  {!!Form::text('price_for_day', $motor->price_for_day)!!} <br>
+
+    {!!Form::label('rent', 'Rent')!!}
+  {!!Form::text('rent', $motor->rent)!!} <br>
+
   {!!Form::submit()!!}
 {!!Form::close()!!}

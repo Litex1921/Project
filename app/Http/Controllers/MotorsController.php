@@ -39,13 +39,17 @@ class MotorsController extends Controller
         $valid = $request->validate([
             'name' => 'required',
             'year_of_production' => 'required|date',
-            'km' => 'required|numeric'
+            'km' => 'required|numeric',
+            'price_for_day'=>'required|numeric',
+            'rent'=>'required'
         ]);
 
         $motor = new Motor;
         $motor->name = $valid['name'];
         $motor->year_of_production = $valid['year_of_production'];
         $motor->km = $valid['km'];
+        $motor->price_for_day = $valid['price_for_day'];
+        $motor->rent = $valid['rent'];
         $motor->save();
         return redirect('/motor');
     }
@@ -86,13 +90,17 @@ class MotorsController extends Controller
         $valid = $request->validate([
             'name' => 'required',
             'year_of_production' => 'required|date',
-            'km' => 'required|numeric'
+            'km' => 'required|numeric',
+            'price_for_day'=>'required|numeric',
+            'rent'=>'required'
         ]);
 
         $motor = Motor::find($id);
         $motor->name = $valid['name'];
         $motor->year_of_production = $valid['year_of_production'];
         $motor->km = $valid['km'];
+         $motor->price_for_day = $valid['price_for_day'];
+        $motor->rent = $valid['rent'];
         $motor->save();
 
         return redirect('/motor');
