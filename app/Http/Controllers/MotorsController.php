@@ -27,7 +27,7 @@ class MotorsController extends Controller
     {
         return view('Motors.create')->with('motor', new Motor());
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *

@@ -28,3 +28,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/motor', 'MotorsController');
 Route::resource('/model', 'ModelsController');
 Route::resource('/manufacturer', 'ManufacturersController');
+
