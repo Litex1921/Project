@@ -1,5 +1,5 @@
-<a href="/motor/create">Create</a>
-<a href="/motor/rent">No rent</a>
+<a href="admin/motor/create">Create</a>
+<a href="/motor?rent=0">No rent</a>
 <table style="width:100%" border="1px solid black">
   <tr>
     <th>Name</th> 
