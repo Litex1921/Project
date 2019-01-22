@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Motor;
+use Illuminate\Support\Facades\Input;
 
 class MotorsController extends Controller
 {
@@ -14,7 +15,12 @@ class MotorsController extends Controller
      */
     public function index()
     {
-        $motors=Motor::all();
+        $rent= Input::get('rent', -1);
+        if($rent==0)
+            $motors=Motor::where('rent','No')->get();
+        else if($rent==1)
+            $motors=Motor::where('rent','Yes')->get();
+        else $motors=Motor::all();
         return view('Motors.index')->with('motors', $motors);
     }
 
@@ -25,7 +31,7 @@ class MotorsController extends Controller
      */
     public function create()
     {
-        return view('Motors.create')->with('motor', new Motor());
+        
     }
     
     /**
@@ -36,22 +42,7 @@ class MotorsController extends Controller
      */
     public function store(Request $request)
     {
-        $valid = $request->validate([
-            'name' => 'required',
-            'year_of_production' => 'required|date',
-            'km' => 'required|numeric',
-            'price_for_day'=>'required|numeric',
-            'rent'=>'required'
-        ]);
-
-        $motor = new Motor;
-        $motor->name = $valid['name'];
-        $motor->year_of_production = $valid['year_of_production'];
-        $motor->km = $valid['km'];
-        $motor->price_for_day = $valid['price_for_day'];
-        $motor->rent = $valid['rent'];
-        $motor->save();
-        return redirect('/motor');
+       
     }
 
     /**
@@ -74,8 +65,7 @@ class MotorsController extends Controller
      */
     public function edit($id)
     {
-        $motor = Motor::find($id);
-        return view('Motors.edit')->with('motor', $motor);
+
     }
 
     /**
@@ -87,23 +77,7 @@ class MotorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $valid = $request->validate([
-            'name' => 'required',
-            'year_of_production' => 'required|date',
-            'km' => 'required|numeric',
-            'price_for_day'=>'required|numeric',
-            'rent'=>'required'
-        ]);
-
-        $motor = Motor::find($id);
-        $motor->name = $valid['name'];
-        $motor->year_of_production = $valid['year_of_production'];
-        $motor->km = $valid['km'];
-         $motor->price_for_day = $valid['price_for_day'];
-        $motor->rent = $valid['rent'];
-        $motor->save();
-
-        return redirect('/motor');
+        
     }
 
     /**
@@ -114,8 +88,6 @@ class MotorsController extends Controller
      */
     public function destroy($id)
     {
-        $motor = Motor::find($id)->delete();
-
-        return redirect('/motor');    
+        
     }
 }
