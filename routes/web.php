@@ -25,12 +25,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/admin/motor', 'Admin\MotorsController');
+Route::resource('/motor', 'Admin\MotorsController');
 Route::resource('/model', 'ModelsController');
 Route::resource('/manufacturer', 'ManufacturersController');
-Route::get('/motor','MotorsController@index');
-Route::get('/motor/{id}','MotorsController@show');
+// Route::get('/motor','MotorsController@index');
+// Route::get('/motor/{id}','MotorsController@show');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/users', 'UserController@index');
+Route::get('/users/{id}/admin/{admin}', 'UserController@admin');

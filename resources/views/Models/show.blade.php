@@ -1,4 +1,6 @@
-<table style="width:100%" border="1px solid black">
+@extends('layouts.app')
+@section('content')
+<table class="table table-striped">
   <tr>
     <th>Name</th>
 </tr>
@@ -7,3 +9,4 @@
   	</td> 			
   </tr>
 </table>
+@endsection

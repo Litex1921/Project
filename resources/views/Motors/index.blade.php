@@ -1,6 +1,8 @@
+@extends('layouts.app')
+@section('content')
 <a href="admin/motor/create">Create</a>
 <a href="/motor?rent=0">No rent</a>
-<table style="width:100%" border="1px solid black">
+<table class="table table-striped">
   <tr>
     <th>Name</th> 
     
@@ -29,5 +31,5 @@
   </tr>
   @endforeach 	
 </table>
-
+@endsection
 

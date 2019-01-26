@@ -1,4 +1,6 @@
-<table style="width:100%" border="1px solid black">
+@extends('layouts.app')
+@section('content')
+<table class="table table-striped">
   <tr>
     <th>Name</th>
     <th>Year of Production</th> 
@@ -15,3 +17,4 @@
     <td>{{$motor->rent}}</td>
   </tr>
 </table>
+@endsection

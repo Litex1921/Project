@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 Create view
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -11,7 +13,8 @@ Create view
 {!!Form::model($models, ['route' => 'model.store'])!!}
 
 	{!!Form::label('name', 'Name')!!}
-	{!!Form::text('name')!!} <br>
+	{!!Form::text('name', '', ['class' => 'form-control'])!!} <br>
 
-	{!!Form::submit()!!}
+	<button class="btn btn-primary" type="submit">Create</button>
 {!!Form::close()!!}
+@endsection
