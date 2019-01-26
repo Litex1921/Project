@@ -7,6 +7,9 @@ use App\Motormodels;
 
 class ModelsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,15 +39,13 @@ class ModelsController extends Controller
      */
     public function store(Request $request)
     {
-            $valid = $request->validate([
+        $valid = $request->validate([
             'name' => 'required'
         ]);
-            $models = new Motormodels;
+        $models = new Motormodels;
         $models->name = $valid['name'];
         $models->save();
         return redirect('/model');
-    
-
     }
 
     /**

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Manufacturer;
 
 class ManufacturersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('admin');
+    }
     public function index()
     {
-        return view('Manufacturers.index');
+         $manufacturers=Manufacturer::all();
+        return view('manufacturers.index')->with('manufacturers', $manufacturers);
     }
 
     /**
@@ -23,7 +23,7 @@ class ManufacturersController extends Controller
      */
     public function create()
     {
-        //
+         return view('manufacturers.create')->with('manufacturers', new Manufacturer());
     }
 
     /**
@@ -34,7 +34,15 @@ class ManufacturersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = $request->validate([
+            'name' => 'required',
+            'date_of_create' => 'required|date'
+        ]);
+        $manufacturers = new Manufacturer;
+        $manufacturers->name = $valid['name'];
+        $manufacturers->date_of_create = $valid['date_of_create'];
+        $manufacturers->save();
+        return redirect('/manufacturer');
     }
 
     /**
@@ -45,7 +53,8 @@ class ManufacturersController extends Controller
      */
     public function show($id)
     {
-        //
+         $manufacturer = Manufacturer::find($id);
+        return view('manufacturers.show')->with('manufacturer', $manufacturer);
     }
 
     /**
@@ -56,7 +65,8 @@ class ManufacturersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $manufacturer = Manufacturer::find($id);
+        return view('manufacturers.edit')->with('manufacturer', $manufacturer);
     }
 
     /**
@@ -68,7 +78,16 @@ class ManufacturersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid = $request->validate([
+            'name' => 'required',
+            'date_of_create' => 'required|date'
+        ]);
+
+        $manufacturer = Manufacturer::find($id);
+        $manufacturer->name = $valid['name'];
+        $manufacturer->save();
+
+        return redirect('/manufacturer');
     }
 
     /**
@@ -79,6 +98,8 @@ class ManufacturersController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $model = Manufacturer::find($id)->delete();
+
+        return redirect('/manufacturer');   
     }
 }
