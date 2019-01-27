@@ -28,6 +28,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/motor', 'Admin\MotorsController');
 Route::resource('/model', 'ModelsController');
 Route::resource('/manufacturer', 'ManufacturersController');
+Route::get('/motor/{id}/delete', 'Admin\MotorsController@destroy');
+Route::get('/model/{id}/delete', 'ModelsController@destroy');
+Route::get('/manufacturer/{id}/delete', 'ManufacturersController@destroy');
 // Route::get('/motor','MotorsController@index');
 // Route::get('/motor/{id}','MotorsController@show');
 

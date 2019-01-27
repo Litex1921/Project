@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Motor;
+use Auth;
 use Illuminate\Support\Facades\Input;
 
 class MotorsController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -35,6 +36,7 @@ class MotorsController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         return view('Motors.create')->with('motor', new Motor());
     }
     
@@ -46,6 +48,7 @@ class MotorsController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         $valid = $request->validate([
             'name' => 'required',
             'year_of_production' => 'required|date',
@@ -84,6 +87,7 @@ class MotorsController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         $motor = Motor::find($id);
         return view('Motors.edit')->with('motor', $motor);
     }
@@ -97,6 +101,7 @@ class MotorsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         $valid = $request->validate([
             'name' => 'required',
             'year_of_production' => 'required|date',
@@ -124,6 +129,7 @@ class MotorsController extends Controller
      */
     public function destroy($id)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         $motor = Motor::find($id)->delete();
 
         return redirect('/motor');    

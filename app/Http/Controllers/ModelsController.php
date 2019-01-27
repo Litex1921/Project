@@ -8,7 +8,7 @@ use App\Motormodels;
 class ModelsController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -28,6 +28,7 @@ class ModelsController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
          return view('Models.create')->with('models', new Motormodels());
     }
 
@@ -39,6 +40,7 @@ class ModelsController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         $valid = $request->validate([
             'name' => 'required'
         ]);
@@ -56,6 +58,7 @@ class ModelsController extends Controller
      */
     public function show($id)
     {
+
          $model = Motormodels::find($id);
         return view('Models.show')->with('model', $model);
     }
@@ -68,6 +71,7 @@ class ModelsController extends Controller
      */
     public function edit($id)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
         $model = Motormodels::find($id);
         return view('Models.edit')->with('model', $model);
     }
@@ -81,6 +85,8 @@ class ModelsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
+
          $valid = $request->validate([
             'name' => 'required',   
              ]);
@@ -100,7 +106,8 @@ class ModelsController extends Controller
      */
     public function destroy($id)
     {
-         $model = Motormodels::find($id)->delete();
+        if(!Auth::user()->admin) return view('message')->with('message', 'You are not allowed to do that');
+        $model = Motormodels::find($id)->delete();
 
         return redirect('/model');   
     }
